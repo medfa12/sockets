@@ -1,4 +1,4 @@
-import voiture.*;
+
 import java.io.*;
 import java.net.*;
 public class ClientUDP {
@@ -24,10 +24,13 @@ public class ClientUDP {
 
         ByteArrayInputStream bais = new ByteArrayInputStream(receiveData);
         ObjectInputStream ois = new ObjectInputStream(bais);
-        int newCarburant = (int) ois.readObject();
+        try {
+            voiture voitureMiseAJour = (voiture) ois.readObject();
+            System.out.println("Réponse reçue. Carburant actuel: " + voitureMiseAJour.getCarburant() + " litres.");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Classe de l'objet non trouvée.");
+        }
 
-
-        System.out.println("Nouveau niveau de carburant : " + newCarburant);
 
 
         clientSocket.close();

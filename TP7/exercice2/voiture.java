@@ -1,6 +1,6 @@
 
 import java.io.*;
-class voiture implements Serializable {
+public class voiture implements Serializable {
     private int carburant;
     private String model;
     private String type;
